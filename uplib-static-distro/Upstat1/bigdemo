@@ -1,0 +1,14 @@
+#
+foreach f ( /local/home/schomake/exp/NA-KdK-experiments/navis/unfragmented-unp/*.unp )
+  set u = `basename $f ".unp" `
+  \rm demo.ypdf
+  ../bin/upstat1 $f -l WORD \
+                   -O ypdf \
+                   -o demo.ypdf 
+  echo "plot 'xyobj.dat' w l" >! tmp.gnu
+  echo "pause 5" >> tmp.gnu
+  xv /data/APS/projects/web/NA/KdK/Boek-7823/navis/strips/$u.pgm &
+  gnuplot < tmp.gnu
+  killall xv
+end                   
+

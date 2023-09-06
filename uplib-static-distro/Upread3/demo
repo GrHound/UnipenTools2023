@@ -1,0 +1,17 @@
+#
+\rm images/*.pgm
+#
+../bin/upread3 demo.unp -l WORD \
+                   -O output_image \
+                   -o images/unipen-word-image \
+                   -scale normalize \
+                   -b 7 \
+                   -frmt pgm \
+                   -w 750 \
+                   -h 250 \
+                   -n 100 -r -1 \
+                   -l WORD
+                   
+
+#
+xvls -wait 0.1 images/unipen-word-image*.pgm
