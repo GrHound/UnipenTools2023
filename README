@@ -1,13 +1,46 @@
-This package contains experimental software for generating
-images from Unipen. A brush is used to produce a quasi ink
+This is a version of UpTools by the former Unipen Foundation and research groups at the University of Nijmegen and 
+the University of Groningen. Imported by Lambert Schomaker. Main programming work by Lambert Schomaker & Louis Vuurpijl
+with several contributions by others (Isabelle Guyon, Gerben Abbink) and student teams.
+
+README
+install  Install script
+Unipen2eps  To make .eps postscript files from unipen data
+Uplib       The library that is needed by the other tools
+Upread2     Actually: upread3, the central program to extract words, characters etc. from a Unipen file
+Upstat1     Simple exports from unipen
+Upview      Crude X11 main program to visualize Unipen files
+
+Contoursom2unipen   Very specific tool for visualizing Kohonen maps of usually contours of character images
+                    which are translated to unipen format to be able to use UpTools tools on them.
+
+bin/    Filled with binaries upon running the install script on a Linux.
+
+unipen.def  Unipen File format definition file by Isabelle Guyon
+
+images/
+
+
+
+This package now also contains experimental software for generating
+images from Unipen files (upread3) for training modern image-based
+handwriting recognizers. A brush is used to produce a quasi ink
 deposit with a "raised cosine" which is flattened by raising
 it to to the power 0.25. A good brush width is 5 or 7 for
 this particular data.
 
 The software does not have been tested extensively.
 
+Please cite the Unipen article when using this software:
+I. Guyon, L. Schomaker, R. Plamondon, M. Liberman and S. Janet, 
+"UNIPEN project of on-line data exchange and recognizer benchmarks," 
+Proceedings of the 12th IAPR International Conference on Pattern 
+Recognition, Vol. 3 - Conference C: Signal Processing (Cat. No.94CH3440-5), 
+Jerusalem, Israel, 1994, pp. 29-33 vol.2, doi: 10.1109/ICPR.1994.576870.
+https://ieeexplore.ieee.org/document/576870
+
+
 Lambert Schomaker
-nov. 2004.
+Nov. 2004./Sept.2023
 
 Install:
 
@@ -19,7 +52,7 @@ cd Upstat
 # Example run.
 #
 ./doit
-
+_______________________________________________________________
 NOTE
 Dear Qiao Yu,
 
@@ -37,3 +70,124 @@ the same distro to one of my students.
 
 Best regards,
 Lambert 
+_______________________________________________________________
+USAGE info per tool
+_______________________________________________________________
+upview
+
+upview V3.03 March 1997 - L.Schomaker, L.Vuurpijl, G.Abbink  - NICI The Netherlands
+Usage: 
+   upview [-options] <wildspec of UniPen files>
+
+Options:
+    -p <number>:  PenDown pressure criterion, e.g., -p0 inks all p>0
+    -c <number>:  number of columns in display, e.g., -c3
+    -i <number>:  line thickness of Ink in X11 pixels, e.g., -i4
+    -h <number>:  requested hierarchy level (differs per file), e.g., -h0 is top level
+
+    -B:           biggest chunk size determines all scaling
+    -S:           setup .X_DIM/.Y_DIM determines all scaling
+Or: -O:           optimal scaling per chunk (periods and comma's are inflated)
+
+    -Y:           multiply Y channel by -1
+    -U:           also show .PENUP signal
+    -V:           display (pseudo)velocity for digitizer assessment
+    -f <file>:    the UNIPEN definition file (default=unipen.def)
+    -W <width>:  (default=850)
+    -H <height>: (default=770)
+    -NL:          do not display labels
+
+_______________________________________________________________
+upstat1: V1.0 Jun 2005 KIRUG - L.Schomaker, L.Vuurpijl, G.Abbink  - NICI
+use: upstat1 unipen-file [unipen-files] [options]!
+options are:
+     -o  outfile (used as base for output)
+     -p  patfile
+     -s  string
+     -i  index
+     -l  level
+     -F  first
+     -L  last
+     -Z  (for output in .COORD X Y Z format, default=X Y)
+     -O  output-function
+where output-function can be any of the following strings:
+         unipen
+         featchar
+         namedxy
+         rawxy
+         xpdf
+         ypdf
+         wpdf
+         hpdf
+
+_______________________________________________________________
+
+upread3: V3.1 Feb 2002 KIRUG - L.Schomaker, L.Vuurpijl, G.Abbink  - NICI
+Nargs<2? Use: upread3 unipen-file [unipen-files] [options]!
+options are:
+     -o  outfile (used as base for 'output_image')
+     -p  patfile
+     -s  string
+     -i  index
+     -l  level
+     -F  first
+     -L  last
+     -Z  (for output in .COORD X Y Z format, default=X Y)
+     -O  output-function
+where output-function can be any of the following strings:
+         output_unipen
+         output_featchar
+         output_image
+         output_namedxy
+         output_rawxy
+     -scale rawxy|leftxy|midxy|midxbasy|normalize[=default] coordinates
+     -n  #resample points (for 'output_image' and 'output_featchar')
+     -d  factor for adjusting resampling (between [0,1])
+     -m  margin (for 'output_image')
+     -b  brush  (for 'output_image')
+     -w  width  (for 'output_image')
+     -h  height (for 'output_image')
+     -frmt [xbm|ppm|pgm] (for image output format
+     -canvas imagefile.[pnm] (for background image of given size)
+     -clearcanvas (with -canvas)
+     -filledcontours (for pgmfeat coco contours)
+     -nsmooth <i> (xy coordinate smoothing <= 1 is no filtering
+     -inkmodel <i> (ink-deposition model, solid|ballpoint|fountain|fountainwetpaper|cal45|spray)
+     -labeled  (image outfilename contains segname)
+
+_____________________________________________________________________________________________________
+unipen2eps
+use: unipen2eps unipen-file [unipen-files] [options]!
+options are:
+     -o  epsfile
+     -P  patfile
+     -b  boxsize
+     -ys ystep
+     -W  width
+     -H  height
+     -f  fontsize
+     -c  ncolumns
+     -s  string
+     -i  index
+     -I  index file
+     -l  level
+     -m  margin (fraction, say .05)
+     -F  first
+     -L  last
+     -mp minpres
+     -pd width (width of pendown strokes)
+     -pu width (width of penup strokes)
+     -p  point_size (radius of sample points)
+     -S  (for same scale)
+     -PX page-offset X-direction
+     -PY page-offset Y-direction
+     -LX label-offset X-direction
+     -LY label-offset Y-direction
+     -NL (for no label)
+_____________________________________________________________________________________________________
+contoursom2unipen
+Usage: contoursom2unipen nw nh nfeat fact somfile.feat (no)label (no)skipline scalemode(asis|left|reco_scale|reco_pos_scale|xt|yt) > somfile.unp
+
+This tool is rather dedicated and was used to create, e.g., the image at
+https://www.ai.rug.nl/~lambert/allographic-fraglet-codebooks/allographic-fraglet-codebooks.html
+_____________________________________________________________________________________________________
