@@ -1,0 +1,39 @@
+This package contains experimental software for generating
+images from Unipen. A brush is used to produce a quasi ink
+deposit with a "raised cosine" which is flattened by raising
+it to to the power 0.25. A good brush width is 5 or 7 for
+this particular data.
+
+The software does not have been tested extensively.
+
+Lambert Schomaker
+nov. 2004.
+
+Install:
+
+./install
+
+Upstat1:
+cd Upstat
+#
+# Example run.
+#
+./doit
+
+NOTE
+Dear Qiao Yu,
+
+I have forgotten to send a kind of "dtd" file which
+belongs to the unipen software: unipen.def.
+
+Before running upread2, two environment variables
+need to be set:
+
+UNIPEN_DEFINITION_FILE=/home/<your name>/unipen.def
+UNIPEN_INCLUDE_PATH=". .INHERIT"
+
+Sorry for this omission, I noticed it when I gave
+the same distro to one of my students.
+
+Best regards,
+Lambert 

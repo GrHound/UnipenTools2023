@@ -1,0 +1,8 @@
+#
+set u = navis-H24001_7824_1299-line-014-y1=2321-y2=2619.unp
+\rm demo.ypdf
+../bin/upstat1 $u -l WORD \
+                   -O ypdf \
+                   -o demo.ypdf 
+                   
+

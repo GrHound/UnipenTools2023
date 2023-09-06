@@ -1,0 +1,25 @@
+#
+cd Uplib
+make clean
+make
+#
+cd ../Upview/
+make clean
+make
+#
+cd ../Upstat1/
+make clean 
+make
+#
+cd ../Upread3/
+make clean 
+make
+
+cd ../Contoursom2unipen/
+make clean 
+make
+
+cd ../Unipen2eps/
+make clean
+make
+

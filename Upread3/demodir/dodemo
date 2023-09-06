@@ -1,0 +1,15 @@
+#
+set o = "demo.out"
+set npoints = 300
+set coordnorm = midxbasy
+#
+foreach f ( *.unp )
+   banner $f
+   \rm -f $o
+   ../../bin/upread2 $f -O output_namedxy -l WORD -s '*' \
+                         -n $npoints -scale $coordnorm \
+                         -o $o 
+#   more $o
+    cat yhist.par
+    gnuplot
+end
